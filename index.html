@@ -703,7 +703,9 @@
     avg.final_grass = (avg.final_grass / results.length).toFixed(2);
     avg.final_animals = (avg.final_animals / results.length).toFixed(2);
     avg.total_turns = (avg.total_turns / results.length).toFixed(2);
-    let html = `<div>Trials: ${results.length}</div><div>Avg grass: ${avg.final_grass} | Avg animals: ${avg.final_animals} | Avg turns: ${avg.total_turns}</div>`;
+    const extinctAnimalCount = results.filter(r => r.animal_extinct_turn !== 'NA').length;
+    const extinctAnimalProb = (extinctAnimalCount / results.length * 100).toFixed(1);
+    let html = `<div>Trials: ${results.length}</div><div>Avg grass: ${avg.final_grass} | Avg animals: ${avg.final_animals} | Avg turns: ${avg.total_turns}| Animal extinction: ${extinctAnimalProb}%</div>`;
     html += '<div class="mt-2 overflow-auto max-h-48"><table class="text-xs w-full"><thead><tr><th>#</th><th>seed</th><th>final_grass</th><th>final_animals</th><th>grass_extinct</th><th>animal_extinct</th><th>turns</th></tr></thead><tbody>';
     for (const r of results){ html += `<tr><td>${r.trial}</td><td>${r.seed}</td><td>${r.final_grass}</td><td>${r.final_animals}</td><td>${r.grass_extinct_turn}</td><td>${r.animal_extinct_turn}</td><td>${r.total_turns}</td></tr>`; }
     html += '</tbody></table></div>';
